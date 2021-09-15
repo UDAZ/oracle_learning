@@ -1,0 +1,240 @@
+SQL> update member set salary = `A`;
+update member set salary = `A`
+                           *
+行1でエラーが発生しました。:
+ORA-00911: 文字が無効です。
+
+
+SQL> update people set birth = 1;
+update people set birth = 1
+       *
+行1でエラーが発生しました。:
+ORA-00942: 表またはビューが存在しません。
+
+
+SQL> desc member
+ 名前                                      NULL?    型
+ ----------------------------------------- -------- ----------------------------
+ ID                                                 CHAR(4)
+ NAME                                               VARCHAR2(16)
+ SALARY                                             NUMBER(10)
+
+SQL> INSERT into member (id,name,salary) values('A001','Tom',100);
+
+1行が作成されました。
+
+SQL> desc member
+ 名前                                      NULL?    型
+ ----------------------------------------- -------- ----------------------------
+ ID                                                 CHAR(4)
+ NAME                                               VARCHAR2(16)
+ SALARY                                             NUMBER(10)
+
+SQL> commit
+  2
+SQL> commit;
+
+コミットが完了しました。
+
+SQL> desc member
+ 名前                                      NULL?    型
+ ----------------------------------------- -------- ----------------------------
+ ID                                                 CHAR(4)
+ NAME                                               VARCHAR2(16)
+ SALARY                                             NUMBER(10)
+
+SQL> INSERT into member (id,name,salary) values('A002','Jane',80);
+
+1行が作成されました。
+
+SQL> INSERT into member (id,name,salary) values('A003','John',120);
+
+1行が作成されました。
+
+SQL> commit
+  2
+SQL> commit;
+
+コミットが完了しました。
+
+SQL> select id, name from member;
+
+ID       NAME
+-------- --------------------------------
+A001     Tom
+A002     Jane
+A003     John
+
+SQL> select * from member;
+
+ID       NAME                                 SALARY
+-------- -------------------------------- ----------
+A001     Tom                                     100
+A002     Jane                                     80
+A003     John                                    120
+
+SQL> select id, name from member where name='Tom';
+
+ID       NAME
+-------- --------------------------------
+A001     Tom
+
+SQL> select id, name, salary from member where salary > 90;
+
+ID       NAME                                 SALARY
+-------- -------------------------------- ----------
+A001     Tom                                     100
+A003     John                                    120
+
+SQL> UPDATE member SET name = 'Tommy', salary = 1000 where id = 'A001';
+
+1行が更新されました。
+
+SQL> commit;
+
+コミットが完了しました。
+
+SQL> select * from member;
+
+ID       NAME                                 SALARY
+-------- -------------------------------- ----------
+A001     Tommy                                  1000
+A002     Jane                                     80
+A003     John                                    120
+
+SQL> delete from member whrere id = 'A002';
+delete from member whrere id = 'A002'
+                          *
+行1でエラーが発生しました。:
+ORA-00933: SQLコマンドが正しく終了されていません。
+
+
+SQL> delete from member where id = 'A002';
+
+1行が削除されました。
+
+SQL> commit
+  2
+SQL> commit;
+
+コミットが完了しました。
+
+SQL> select * from member;
+
+ID       NAME                                 SALARY
+-------- -------------------------------- ----------
+A001     Tommy                                  1000
+A003     John                                    120
+
+SQL> truncate table member;
+
+表が切り捨てられました。
+
+SQL> select * from member;
+
+レコードが選択されませんでした。
+
+SQL> drop table member;
+
+表が削除されました。
+
+SQL> crate table emp (empno NUMBER(4),ename VARCHAR(4 CHAR),
+SP2-0734: "crate tabl..."で開始するコマンドが不明です - 残りの行は無視されま した。
+SQL> create table emp (empno NUMBER(4),ename VARCHAR(4 CHAR),
+  2  job VARCHAR(2 CHAR), sal NUMBER(6), age NUMBER(3), deptno NUMBER(4));
+
+表が作成されました。
+
+SQL> create table dept (deptno NUMBER(4), dname VARCHAR2(3 CHAR),telno VARCHAR2(10));
+
+表が作成されました。
+
+SQL> dese emp
+SP2-0042: 不明なコマンドです("dese emp")。行の残りは無視されました。
+SQL> desc emp
+ 名前                                      NULL?    型
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                              NUMBER(4)
+ ENAME                                              VARCHAR2(4 CHAR)
+ JOB                                                VARCHAR2(2 CHAR)
+ SAL                                                NUMBER(6)
+ AGE                                                NUMBER(3)
+ DEPTNO                                             NUMBER(4)
+
+SQL> desc dept
+ 名前                                      NULL?    型
+ ----------------------------------------- -------- ----------------------------
+ DEPTNO                                             NUMBER(4)
+ DNAME                                              VARCHAR2(3 CHAR)
+ TELNO                                              VARCHAR2(10)
+
+SQL> INSERT into emp (1001,'本田三郎','営業',720,34,2);
+INSERT into emp (1001,'本田三郎','営業',720,34,2)
+                 *
+行1でエラーが発生しました。:
+ORA-00928: SELECTキーワードがありません。
+
+
+SQL> INSERT into emp values(1001,'本田三郎','営業',720,34,2);
+
+1行が作成されました。
+
+SQL> INSERT into emp values(1002,'中村次郎','総務',720,29,2);
+
+1行が作成されました。
+
+SQL> INSERT into emp values(1003,'山田花子','総務',600,30,1);
+
+1行が作成されました。
+
+SQL> INSERT into emp values(1004,'三田海子','技術',720,58,3);
+
+1行が作成されました。
+
+SQL> INSERT into emp values(1005,'山本太郎','技術',900,36,1);
+
+1行が作成されました。
+
+SQL> INSERT into emp values(1006,'山田一太','総務',510,22,1);
+
+1行が作成されました。
+
+SQL> INSERT into dept values(2,'流通部','0312345678');
+
+1行が作成されました。
+
+SQL> INSERT into dept values(1,'金融部','0312345679');
+
+1行が作成されました。
+
+SQL> INSERT into dept values(3,'公共部','0312345670');
+
+1行が作成されました。
+
+SQL> INSERT into dept values(4,'特別部','0312345677');
+
+1行が作成されました。
+
+SQL> commit;
+
+コミットが完了しました。
+
+SQL> select dname "部署名" from dept;
+
+部署名
+------
+流通部
+金融部
+公共部
+特別部
+
+SQL> select dname from dept;
+
+DNAME
+------
+流通部
+金融部
+公共部
+特別部
+
+SQL>
